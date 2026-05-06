@@ -1,210 +1,361 @@
-<!DOCTYPE HTML>
-<html>
-
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-	<title>Dr. Bin Wu at Sun Yat-sen University(SYSU)</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Bin Wu | Sun Yat-sen University</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --sysu-red: #A62121;     /* 红砖色 */
+            --sysu-green: #005830;   /* 绿瓦色/中大绿 */
+            --stone-white: #F9F7F2;  /* 石阶白 */
+            --tech-blue: #00d2ff;    /* 遥感特征发光色 */
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'PingFang SC', serif;
+            background-color: var(--stone-white);
+            color: var(--text-dark);
+            margin: 0;
+            line-height: 1.8;
+            /* 城市地理坐标网格背景 */
+            background-image: 
+                linear-gradient(rgba(0, 88, 48, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 88, 48, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* --- 导航栏：绿瓦底色 --- */
+        nav {
+            background-color: var(--sysu-green);
+            padding: 1rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a { color: #fff; text-decoration: none; font-weight: 600; margin-left: 30px; transition: 0.3s; }
+        nav a:hover { color: #ffd700; } /* 金色点缀 */
+
+        /* --- Hero Section：卫星扫描动效 --- */
+        .hero {
+            position: relative;
+            padding: 100px 10%;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('images/wordcloud.png');
+            background-size: cover;
+            overflow: hidden;
+            border-bottom: 5px solid var(--sysu-red);
+        }
+
+        /* 模拟卫星扫描线 */
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--tech-blue), transparent);
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .hero-content { display: flex; align-items: center; gap: 50px; position: relative; z-index: 2; }
+        .profile-img { 
+            width: 380px; 
+            border: 8px solid #fff; 
+            box-shadow: 10px 10px 0px var(--sysu-red); /* 红砖装饰框 */
+            border-radius: 2px;
+        }
+
+        /* --- 标题样式：红砖感 --- */
+        h1, h2 { color: var(--sysu-red); font-family: 'Noto Serif SC', serif; }
+        h2 { 
+            font-size: 2rem; 
+            border-bottom: 2px solid var(--sysu-green); 
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        /* --- 研究领域卡片：遥感图标风 --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 50px 10%; }
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-left: 5px solid var(--sysu-green);
+            transition: 0.4s;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(166, 33, 33, 0.1);
+            border-left-color: var(--sysu-red);
+        }
+        .card i { font-size: 2.5rem; color: var(--sysu-green); margin-bottom: 20px; opacity: 0.8; }
+
+        /* --- 论文发表：学术严谨风 --- */
+        .pub-section { padding: 50px 10%; background: #fff; }
+        .pub-item { 
+            padding: 15px 0; 
+            border-bottom: 1px dashed #ccc;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .pub-item::before {
+            content: "●";
+            color: var(--sysu-red);
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        /* --- 底部：绿瓦底 --- */
+        footer {
+            background-color: var(--sysu-green);
+            color: #eee;
+            padding: 60px 10% 20px;
+            margin-top: 50px;
+        }
+
+        .contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px; }
+        .footer-bottom { 
+            text-align: center; 
+            margin-top: 40px; 
+            padding-top: 20px; 
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero-content { flex-direction: column; text-align: center; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
+<body>
 
-<body class="is-preload">
-	<!-- Wrapper -->
-	<div id="wrapper">
-		<!-- Main -->
-		<div id="main">
-			<div class="inner">
+<nav>
+    <div style="color: #fff; font-size: 1.2rem; letter-spacing: 2px;">
+        <strong>BIN WU</strong> | Sun Yat-sen University
+    </div>
+    <div>
+        <a href="#about">简介</a>
+        <a href="#research">研究</a>
+        <a href="#publications">论文</a>
+        <a href="#awards">奖励</a>
+        <a href="#contact">联系</a>
+    </div>
+</nav>
 
-				<!-- Header -->
-				<header id="header">
-					<a href="index.html" class="logo">
-						<marquee behavior="scroll" direction="left">欢迎来到我的个人网页!</marquee>
-					</a>
-				</header>
+<section class="hero" id="about">
+    <div class="hero-content">
+        <img src="images/pic_wubin.jpg" alt="吴宾" class="profile-img">
+        <div>
+            <h1>吴宾 <small style="font-size: 1.2rem; color: var(--text-dark); opacity: 0.9;">副教授 / 硕士生导师</small></h1>
+            <p style="font-size: 1.1rem; max-width: 800px;">
+                中山大学遥感科学与技术学院“百人计划”副教授。聚焦<strong>城市遥感</strong>，从事<strong>激光雷达遥感、夜间灯光遥感、城市可持续发展</strong>等方向的研究工作。先后主持了包括国家自然科学基金项目(面上/青年)、广东省自然科学基金面上项目、上海市青年科技英才扬帆计划项目、中国博士后科学基金特别资助等国家级和省部级项目多项，已在RSE、ISPRS P&RS、IJGIS等国内外遥感和GIS顶级专业期刊发表学术论文60余篇，3篇ESI前1%高被引论文，Google Scholar引用次数超3300余次。
+            </p>
+            <div style="margin-top: 20px;">
+                <a href="https://scholar.google.com/citations?user=YPp-qPcAAAAJ" target="_blank" style="color: var(--sysu-red); font-weight: bold; text-decoration: none; margin-right: 20px;">
+                    <i class="fa-solid fa-graduation-cap"></i> Google Scholar
+                </a>
+                <a href="https://www.researchgate.net/profile/Bin-Wu-30" target="_blank" style="color: var(--sysu-red); font-weight: bold; text-decoration: none;">
+                    <i class="fa-brands fa-researchgate"></i> ResearchGate
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
-				<!-- Banner -->
-				<section id="banner">
-					<div class="content">
-						<header>
-							<h1 style="color: black;">吴宾<br /></h1>
-							<h2 style="color: black;">个人简介</h2>
-						</header>
-						<h3 style="color: black;">
-							中山大学遥感科学与技术学院“百人计划”副教授。聚焦城市三维地理计算与人居环境应用，从事多源激光雷达信息提取、三维建模与应用、城市遥感（夜间灯光遥感）等方向的研究工作。先后主持了包括国家自然科学基金项目(面上/青年)、广东省自然科学基金面上项目、上海市青年科技英才扬帆计划项目、中国博士后科学基金特别资助等国家级和省部级项目多项，已在RSE、ISPRS
-							P&RS、IJGIS等国内外遥感和GIS顶级专业期刊发表学术论文50余篇，3篇ESI前1%高被引论文，Google Scholar引用次数超2900次。</h3>
-					</div>
-					<span class="image object">
-						<img src="images/pic_wubin.jpg" alt="" />
-					</span>
-				</section>
+<section id="research" style="padding-top: 80px;">
+    <div style="text-align: center;">
+        <h2>研究方向 / Research Fields</h2>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <img src="images/icon21.jpg" width="400" >
+            <h3>激光雷达遥感</h3>
+            <p>多源激光雷达（星载、机载、车载、地基）数据处理与信息提取，如点云配准、建筑和行道树提取等。</p>
+        </div>
+        <div class="card">
+            <img src="images/icon22.jpg" width="400" >
+            <h3>夜间灯光遥感</h3>
+            <p>可持续发展卫星SDGSAT-1微光数据、NPP/VIIRS、DMSP/OLS等夜间灯光数据处理与信息挖掘。</p>
+        </div>
+        <div class="card">
+            <img src="images/icon23.jpg" width="400" >
+            <h3>三维信息应用</h3>
+            <p>重点关注智慧城市与可持续发展，人居环境三维信息表征与评价，例如三维可视率、绿视率、环境暴露等。</p>
+        </div>
 
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>研究方向</h2>
-					</header>
-					<div class="features">
-						<article>
-							<span class="image"><img src="images/icon01.jpg" height="150" width="150" /></span>
-							<div class="content">
-								<h3>激光雷达遥感</h3>
-								<h4>多源激光雷达（星载、机载、车载、地基）数据处理与信息提取，如点云配准、建筑和行道树提取等。</h4>
-							</div>
-						</article>
-						<article>
-							<span class="image"><img src="images/icon02.jpg" height="150" width="150" /></span>
-							<div class="content">
-								<h3>三维信息应用</h3>
-								<h4>重点关注智慧城市与可持续发展，人居环境三维信息表征与评价，例如三维可视率、绿视率、环境暴露等。</h4>
-							</div>
-						</article>
-						<article>
-							<span class="image"><img src="images/icon03.jpg" height="150" width="150" /></span>
-							<div class="content">
-								<h3>夜间灯光遥感</h3>
-								<h4>可持续发展卫星SDGSAT-1微光数据、NPP/VIIRS、DMSP/OLS等夜间灯光数据处理与信息挖掘。</h4>
-							</div>
-						</article>
-						<article>
-							<span class="image"><img src="images/icon04.jpg" height="150" width="150" /></span>
-							<div class="content">
-								<h3>地理信息科学</h3>
-								<h4>GIS开发、空间认知、时空对象、时空分析，重点关注基于事件和时空对象的时空演变分析以及二三维系统开发。</h4>
-							</div>
-						</article>
-					</div>
-				</section>
+    </div>
+</section>
 
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>部分成果</h2>
-					</header>
-					<div class="posts">
-						<article>
-							<a href="#" class="image"><img src="images/paper05.jpg" alt="" /></a>
-							<h3> 建筑楼层灯光暴露</h3>
-							<h4>利用SDGSAT-1夜光遥感数据，精细分析建筑物楼层夜光暴露程度 (ISPRS 2025)。</h4>
-							<ul class="actions">
-								<li><a href="lightpollution.html" class="button" target="_blank">论文介绍</a></li>
-								<li><a href="https://www.sciencedirect.com/science/article/pii/S0924271625001169"
-										class="button" target="_blank">论文链接</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/paper04.jpg" alt="" /></a>
-							<h3>城市道路提取</h3>
-							<h4>提出了一种基于地形骨架的城市主要道路提取新方法，首次系统证明了国产SDGSAT-1夜光数据在道路提取以及道路照明设施评估中的巨大潜力 (RSE 2024)。</h4>
-							<ul class="actions">
-								<li><a href="https://doi.org/10.1016/j.rse.2024.114448" class="button"
-										target="_blank">论文链接</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/paper01.jpg" height="300" width="600" /></a>
-							<h3>行道树提取</h3>
-							<h4>提出了邻域竞争搜索算法，实现车载点云中单株行道树的高精度提取 （RS 2013， JAG 2016）。</h4>
-							<ul class="actions">
-								<li><a href="https://www.mdpi.com/2072-4292/5/2/584" class="button"
-										target="_blank">论文链接</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/paper02.jpg" height="300" width="600" /></a>
-							<h3>点云配准</h3>
-							<h4>提出了逐步最小生成树配准算法，解决了车载点云与背包点云的数据配准 (IEEE TGRS 2022;IEEE TGRS 2024)。</h4>
-							<ul class="actions">
-								<li><a href="https://ieeexplore.ieee.org/document/9970752" class="button"
-										target="_blank">论文链接</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/paper03.jpg" alt="" /></a>
-							<h3>三维可视性</h3>
-							<h4>建立了三维可视性计算模型，利用点云对城市街道空间品质进行了精细测度 （GRS 2020, BAE 2021）。</h4>
-							<ul class="actions">
-								<li><a href="https://doi.org/10.1016/j.buildenv.2021.108323" class="button"
-										target="_blank">论文链接</a></li>
-							</ul>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/paper06.jpg" alt="" /></a>
-							<h3>二三维GIS系统开发</h3>
-							<h4>开发了多个二、三维GIS系统，巷道建模与管理系统、智慧矿山系统、隧道电缆三维管理系统以及中大测绘实景三维集成系统。</h4>
-							<ul class="actions">
-								<li><a href="#" class="button">More</a></li>
-							</ul>
-						</article>
-					</div>
-				</section>
+<section class="pub-section" id="publications">
+    <h2>代表性论文 / Publications</h2>
+    <div class="pub-item" >
+        <div class="card" >
+            <strong>A local CSF-based method for extracting illuminated urban roads from SDGSAT-1 nighttime light data.</strong><br>
+            Yu Wang, Jiahuan Li, Hailan Huang, Zhirong Zhang, Huabing Huang, Wuming Zhang, <strong style="color:var(--sysu-red);">Bin Wu*</strong>. <em style="color:var(--sysu-red); text-decoration: underline;">Remote Sensing of Environment</em>, 2026. <a href="https://doi.org/10.1016/j.rse.2026.115434" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item" >
+        <div class="card" >
+            <strong>A driving visibility index for evaluating urban road driving safety based on point cloud data.</strong><br>
+            Zhirong Zhang, Yuan Yuan*, Hailan Huang, Yu Wang, Jiahuan Li, <strong style="color:var(--sysu-red);">Bin Wu*</strong>. <em style="color:var(--sysu-red); text-decoration: underline;">Accident Analysis and Prevention</em>, 2026. <a href="https://doi.org/10.1016/j.aap.2026.108479" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>A linear structure-constrained denoising method for enhancing SDGSAT-1 GLI data.</strong><br>
+            Hailan Huang, Yu Wang, Jiahuan Li, Zhirong Zhang, Wuming Zhang, Huabing Huang, <strong style="color:var(--sysu-red);">Bin Wu*</strong>. <em style="color:var(--sysu-red); text-decoration: underline;">Remote Sensing of Environment</em>, 2026. <a href="https://doi.org/10.1016/j.rse.2026.115410" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>Low and uneven rural road lighting coverage in Africa.</strong><br>
+            Jiahuan Li, Yu Wang, Hailan Huang, Zhirong Zhang, <strong style="color:var(--sysu-red);">Bin Wu*</strong>. <em style="color:var(--sysu-red); text-decoration: underline;">Communications Earth & Environment</em>, 2025.  <a href="https://doi.org/10.1038/s43247-025-02915-9" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>Towards building floor-level nighttime light exposure assessment using SDGSAT-1 GLI data.</strong><br>
+            Hailan Huang, <strong style="color:var(--sysu-red);">Bin Wu*</strong>, Yu Wang, Bailang Yu, Huabing Huang, Wuming Zhang. <em style="color:var(--sysu-red); text-decoration: underline;">ISPRS Journal of Photogrammetry and Remote Sensing</em>, 2025. <a href="https://doi.org/10.1016/j.isprsjprs.2025.03.018" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+     <div class="pub-item">
+        <div class="card">
+            <strong>Generating high-resolution DEMs in mountainous regions using ICESat-2/ATLAS photons.</strong><br>
+            Yi Zhao, <strong style="color:var(--sysu-red);">Bin Wu*</strong>, Gefei Kong, He Zhang, Jianping Wu, Bailang Yu, Jin Wu*, Hongchao Fan. <em style="color:var(--sysu-red); text-decoration: underline;">International Journal of Applied Earth Observation and Geoinformation</em>, 2025. <a href="https://doi.org/10.1016/j.jag.2025.104461" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>QuadrantSearch: A novel method for registering UAV and backpack LiDAR point clouds in forested areas.</strong><br>
+            Guorong Li, <strong style="color:var(--sysu-red);">Bin Wu*</strong>, Lei Yang, Zhan Pan, Linxin Dong, Siyu Wu, Guochun Shen, Jiarui Zhang, Tian Xiao, Lefeng Zhang, Jianping Wu, Bailang Yu*. <em style="color:var(--sysu-red); text-decoration: underline;">IEEE Transactions on Geoscience and Remote Sensing</em>, 2025. <a href="https://doi.org/10.1109/TGRS.2024.3518056" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>Potential of SDGSAT-1 nighttime light data in extracting urban main roads.</strong><br>
+            <strong style="color:var(--sysu-red);">Bin Wu</strong>, Yu Wang, Hailan Huang, Shaoyang Liu, Bailang Yu*. <em style="color:var(--sysu-red); text-decoration: underline;">Remote Sensing of Environment</em>, 2024. <a href="https://doi.org/10.1016/j.rse.2024.114448" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>Global spatial patterns between nighttime light intensity and urban building morphology.</strong><br>
+            <strong style="color:var(--sysu-red);">Bin Wu</strong>, Hailan Huang, Yu Wang, Shuxian Shi, Jianping Wu, Bailang Yu*. <em style="color:var(--sysu-red); text-decoration: underline;">International Journal of Applied Earth Observation and Geoinformation</em>, 2023. <a href="https://doi.org/10.1016/j.jag.2023.103495" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>A Vegetation Nighttime Condition Index Derived From The Triangular Feature Space between Nighttime Light Intensity and Vegetation Index.</strong><br>
+            <strong style="color:var(--sysu-red);">Bin Wu</strong>, Zhichao Song, Qiusheng Wu, Jianping Wu, Bailang Yu*. <em style="color:var(--sysu-red); text-decoration: underline;">IEEE Transactions on Geoscience and Remote Sensing</em>, 2023. <a href="https://doi.org/10.1109/TGRS.2023.3305457" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>A building volume adjusted nighttime light index for characterizing the relationship between urban population and nighttime light intensity.</strong><br>
+            <strong style="color:var(--sysu-red);">Bin Wu</strong>, Chengshu Yang, Qiusheng Wu, Congxiao Wang, Jianping Wu, Bailang Yu*. <em style="color:var(--sysu-red); text-decoration: underline;">Computers, Environment and Urban Systems</em>, 2023. <a href="https://doi.org/10.1016/j.compenvurbsys.2022.101911" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>A Stepwise Minimum Spanning Tree Matching Method for Registering Vehicle-borne and Backpack LiDAR Point Clouds.</strong><br>
+            <strong style="color:var(--sysu-red);">Bin Wu</strong>, Lei Yang, Qiusheng Wu, Yi Zhao, Zhan Pan, Tian Xiao, Jiarui Zhang, Jianping Wu, Bailang Yu*. <em style="color:var(--sysu-red); text-decoration: underline;">IEEE Transactions on Geoscience and Remote Sensing</em>, 2022. <a href="https://doi.org/10.1109/TGRS.2022.3226956" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>A spatiotemporal structural graph for characterizing land cover changes.</strong><br>
+            <strong style="color:var(--sysu-red);">Bin Wu</strong>, Bailang Yu*, Song Shu, Qiusheng Wu, Yi Zhao, Jianping Wu*. <em style="color:var(--sysu-red); text-decoration: underline;">International Journal of Geographical Information Science</em>, 2021. <a href="https://doi.org/10.1080/13658816.2020.1778706" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>A surface network based method for studying urban hierarchies by night time light remote sensing data.</strong><br>
+            <strong style="color:var(--sysu-red);">Bin Wu</strong>, Bailang Yu*, Shenjun Yao*, Qiusheng Wu, Zuoqi Chen, Jianping Wu. <em style="color:var(--sysu-red); text-decoration: underline;">International Journal of Geographical Information Science</em>, 2019. <a href="https://doi.org/10.1080/13658816.2019.1585540" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <div class="pub-item">
+        <div class="card">
+            <strong>An Extended Minimum Spanning Tree method for characterizing local urban patterns.</strong><br>
+            <strong style="color:var(--sysu-red);">Bin Wu</strong>, Bailang Yu*, Qiusheng Wu, Zuoqi Chen, Shenjun Yao, Yan Huang, Jianping Wu*. <em style="color:var(--sysu-red); text-decoration: underline;">International Journal of Geographical Information Science</em>, 2018. <a href="https://doi.org/10.1080/13658816.2017.1384830" style="color: blue;">论文链接</a>
+        </div>
+    </div>
+    <p style="margin-top: 20px; color: #666;">... 更多论文请参阅个人<a href="https://scholar.google.com/citations?user=YPp-qPcAAAAJ">Google Scholar</a></p>
+</section>
 
-				<section class="google-map">
-					<iframe
-						src="https://maps.google.com/maps?q=Av.+L%C3%Zhongshan+University+Zhuhai+Campus&t=&z=15&ie=UTF8&iwloc=&output=embed"
-						width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy">
-					</iframe>
-				</section>
-			</div>
-		</div>
+<section id="awards" style="padding-top: 80px;">
+    <div style="text-align: center;">
+        <h2>主要奖励 / Awards</h2>
+    </div>
+<div class="grid" >
+    <div class="card" >
+        <p><strong>教育部科学研究优秀成果奖（工程技术研究成果奖）二等奖</strong> (2025)</p>
+    </div>
+    <div class="card">
+        <p><strong>易智瑞杯中国大学生GIS软件开发竞赛优秀指导老师</strong> (2025)</p>
+    </div>
+    <div class="card">
+        <p><strong>地理信息科技进步奖一等奖</strong> (2025)</p>
+    </div>
+    <div class="card">
+        <p><strong>第二届全国激光雷达遥感讲课比赛一等奖</strong> (2025)</p>
+    </div>
+    <div class="card">
+        <p><strong>中山大学第十三届教师教学竞赛教学创新赛道优秀奖</strong> (2025)</p>
+    </div>
+    <div class="card">
+        <p><strong>广东高校思想政治工作优秀网络课程三等奖</strong> (2025)</p>
+    </div>
+    <div class="card">
+        <p><strong>广东高校思想政治工作优秀论文三等奖</strong> (2025)</p>
+    </div>
+    <div class="card">
+        <p><strong>第十二届高校GIS论坛优秀教学成果奖</strong> (2024)</p>
+    </div>
+    <div class="card">
+        <p><strong>中山大学第十二届教师教学竞赛教学创新赛道二等奖</strong> (2024)</p>
+    </div>
+    <div class="card">
+        <p><strong>全国高校教师国家安全教育教学风采展示优秀风采教师</strong> (2024)</p>
+    </div>
+    <div class="card">
+        <p><strong>易智瑞杯中国大学生GIS软件开发竞赛优秀指导老师</strong> (2023)</p>
+    </div>
+    <div class="card">
+        <p><strong>第二届中国激光雷达青年科学家提名奖</strong> (2023)</p>
+    </div>
+</div>
+</section>
 
-		<!-- Sidebar -->
-		<div id="sidebar" style="background-color: white;">
-			<div class="inner">
-				<!-- Menu -->
-				<nav id="menu">
-					<header class="major">
-						<h2>网页导览</h2>
-					</header>
-					<ul>
-						<h2><a href="index.html">个人主页</a></h2>
-						<h2><a href="publications.html">学术论文</a></h2>
-						<h2><a href="teaching.html">教学服务</a></h2>
-						<h2>
 
-							<span class="opener">成果展示</span>
-							<ul>
-								<li><a href="lightpollution.html" target="_blank">三维建筑灯光暴露<strong
-											style="color:red;">(New!)</strong></a></li>
-								<li><a href="#">大范围建筑高度制图</a></li>
-								<li><a href="#">道路驾驶三维视野计算</a></li>
-								<li><a href="#">基于三维地形的道路提取</a></li>
-							</ul>
-						</h2>
-					</ul>
-				</nav>
-
-				<!-- Section -->
-				<section>
-					<header class="major">
-						<h2>联系方式</h2>
-					</header>
-					<h3>欢迎对我研究方向感兴趣的老师与同学们与我取得联系。</h3>
-					<ul class="contact">
-						<li class="icon solid fa-envelope"><a href="#">wubin65@mail.sysu.edu.cn</a></li>
-						<!--<li class="icon solid fa-phone">暂不公布</li>-->
-						<li class="icon solid fa-home">广东省珠海市唐家湾中山大学珠海校区瀚林三号E区遥感科学与技术学院</li>
-					</ul>
-				</section>
-
-				<!-- Footer -->
-				<footer id="footer">
-					<p class="copyright">&copy; 2024 Bin Wu. All rights reserved. 点击: <a
-							href="https://sges.sysu.edu.cn/teacher/1186" target="_blank">我的官网</a>. </p>
-					<div class="row">
-					</div>
-				</footer>
-			</div>
-		</div>
-
-	</div>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+<footer id="contact">
+    <div class="contact-grid">
+        <div>
+            <h2 style="color: #fff; border-bottom: 2px solid var(--sysu-red);">联系方式 / Contact</h2>
+            <p><i class="fa-solid fa-envelope"></i> wubin65@mail.sysu.edu.cn</p>
+            <p><i class="fa-solid fa-location-dot"></i> 广东省珠海市唐家湾中山大学珠海校区瀚林三号E区遥感科学与技术学院</p>
+            <p><i class="fa-solid fa-link"></i> <a href="https://sges.sysu.edu.cn/teacher/1186" style="color: #fff;">学院官网个人主页</a></p>
+        </div>
+        <div style="text-align: right;">
+            <img src="images/wordcloud.png" style="width: 100%; max-width: 300px; opacity: 0.5; border-radius: 10px;" alt="Research Keywords">
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Bin Wu. All rights reserved. | 城市空间计算实验室 (Urban Spatial Computing Lab)
+    </div>
+</footer>
 
 </body>
-
 </html>
